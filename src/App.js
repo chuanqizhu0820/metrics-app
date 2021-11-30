@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { countryList } from './componets/home';
 
 function App() {
 
@@ -17,9 +18,16 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/details">
-            <Details />
-          </Route>
+          {
+            countryList.map((item)=>{
+              return (
+              <Route path={`/details/${item.toLowerCase()}`}>
+              <Details country={`${item.toLowerCase()}`} />
+              </Route> 
+              )
+            })
+            
+          }
         </Switch>
       </div>
     </Router>

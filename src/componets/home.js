@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+export const countryList = ['China', 'Japan', 'Germany', 'US', "United Kingdom", "Russia", "France"];
 
 function Home(){
-   const countryList = ['China', 'Japan', 'Germany', 'US', "United Kingdom", "Russia", "France"];
+   
    let datenow = new Date();
    datenow.setDate(datenow.getDate() - 1);
    datenow = datenow.toISOString().split('T')[0];
@@ -18,14 +19,16 @@ function Home(){
         <>
         <h4>{datenow}</h4>
         <ul>
-            {countryList.map((item)=>(
-                <a href="details">
+            {countryList.map((item)=>
+            {
+                return (<a href={`details/${item.toLowerCase()}`}>
                 <li key={item}>
                     <div>{item}</div>
                     <div>{!!data ? data.dates[datenow].countries[item].today_new_confirmed : "0"}</div>
                 </li>
-                </a>
-            ))}
+                </a>)
+            }
+                )}
         </ul>
         
         </>
