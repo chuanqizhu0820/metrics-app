@@ -1,5 +1,7 @@
 
 import { useState, useEffect } from 'react';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import './details.css'
 
 function Details({country}){
 
@@ -13,22 +15,42 @@ function Details({country}){
 
    useEffect(()=>fetch(`https://api.covid19tracking.narrativa.com/api/country/${country}?date_from=${datebefore}&date_to=${datenow}`)
   .then(res => res.json())
-  .then(data => setData(data.dates)),[])// eslint-disable-line
+  .then(data => 
+    {
+        let dataChart = []
+        Object.keys(data.dates).map((item)=>{
+            const newCases = Object.values(Object.values(data.dates[item])[0])[0].today_new_confirmed;
+            const newDeaths = Object.values(Object.values(data.dates[item])[0])[0].today_new_deaths;
+            let dataObj = {date:item.substring(5), new: newCases, deaths: newDeaths }
+            dataChart = [...dataChart, dataObj];
+            return 0
+        });
+        setData(dataChart);
+    }),[])// eslint-disable-line
 
+     console.log(data);
     return (
-        <div>
-             <h1>here are the details of {country}</h1>
-             {!!data ? Object.keys(data).map((item)=>{
-                 return (
-                     <>
-                     <div>{item}</div>
-                     <div>{Object.values(Object.values(data[item])[0])[0].today_new_confirmed}</div>
-                     <div>{Object.values(Object.values(data[item])[0])[0].today_new_deaths}</div>
-                     </>
-                 )
-             }
-             ): ""}
-
+        <div className="chart-container">
+            <ResponsiveContainer width="100%" height="100%">
+                <BarChart 
+                width={600}
+                height={300}
+                data={data}
+                >
+                <XAxis axisLine={false} dataKey="date" height={50}/>
+                <Bar dataKey="new" fill="#8884d8" label={{ fill: 'black', fontSize: 15 }}/>
+                </BarChart>
+            </ResponsiveContainer>
+            <ResponsiveContainer width="100%" height="100%">
+                <BarChart 
+                width={600}
+                height={300}
+                data={data}
+                >
+                <XAxis axisLine={false} dataKey="date" height={50}/>
+                <Bar dataKey="deaths" fill="#242E52" label={{ fill: 'white', fontSize: 15 }}/>
+                </BarChart>
+            </ResponsiveContainer>
         </div>
     )
 }
