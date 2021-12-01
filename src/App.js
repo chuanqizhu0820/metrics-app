@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { loadHome } from './redux/app';
 
-export const countryList = ['China', 'Japan', 'Germany', 'US', "United Kingdom", "Russia", "France"];
+export const countryList = ['China', 'Japan', 'Germany', 'US', "United Kingdom", "Russia", "France", "Italy", "Spain"];
 
 let datenow = new Date();
 datenow.setDate(datenow.getDate() - 1);
@@ -35,11 +35,9 @@ function App() {
       <div>
           <Switch>
           <Route exact path="/">
-             <h4>{datenow}</h4>
             <Home />
           </Route>
            <Route path="/home">
-             <h4>{datenow}</h4>
             <Home />
           </Route>
           {

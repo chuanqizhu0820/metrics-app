@@ -7,15 +7,26 @@ function Home(){
     const data = useSelector((state)=>state.dataReducer[0])
     return (
         <>
+        <div className="row">
+            <div className="title-box col d-flex flex-column align-items-center">
+            <div className="title-date">{dateNow}</div>
+            <div className="title-text"> Worldwide</div>
+            <div className="title-num">new cases: 10000</div>
+        </div>
+        </div>
         <div className="row row-cols-2">
-            {countryList.map((item)=>
+            {countryList.map((item, idx)=>
             {
-                return (<a href={`details/${item.toLowerCase()}`}>
-                <div key={item} className="home-items col d-flex flex-row justify-content-between">
-                    <div>{item}</div>
-                    <div>{!!data ? data[dateNow].countries[item].today_new_confirmed : "0"}</div>
-                </div>
-                </a>)
+                const colorType = Math.floor((idx+1)/2)%2===0 ? "dark" : "shallow";
+                const paddingType = idx%2 ===0 ? "left":"right";
+                return (
+                <a key={item} href={`details/${item.toLowerCase()}`} className={`item-box-${colorType} item-box-${paddingType} col`}>
+                    <div className="d-flex flex-column align-items-center">
+                    <div className="country-text">{item}</div>
+                    <div className="case-text">New cases: {!!data ? data[dateNow].countries[item].today_new_confirmed : "0"}</div>
+                    </div>
+                </a>   
+              )
             }
                 )}
         </div>

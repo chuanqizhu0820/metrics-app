@@ -1,8 +1,57 @@
-.home-items{
-    list-style-type: none;
-    padding-top: 80%;
+.title-box{
+    background-color: rgb(85, 85, 230);
+    color: white;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.title-date{
+    font-size: 20px;
+}
+
+.title-text{
+    font-size: 30px;
+}
+
+.title-num{
+    font-size: 20px;
+}
+
+.item-box-dark{
+    border: solid white 1px;
+    background-color: rgb(70, 70, 223);
+    color: white;
+    border: none;
+    padding: 0;
+}
+
+.item-box-shallow{
+    border: solid white 1px;
+    background-color: rgb(101, 101, 241);
+    color: white;
+    border: none;
+    padding: 0;
+}
+
+.item-box-left{
+    padding-left:4%;
+}
+
+.item-box-right{
+    padding-right:4%;
 }
 
 a{
     text-decoration: none;
 }
+
+.country-text{
+    font-size: 150%;
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
+
+.case-text{
+    padding-bottom: 10%;
+}
+
