@@ -28,14 +28,10 @@ function App() {
       .then((data) => {
         dispatch(loadHome({ home: data }));
       });
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <Router>
-      <div>
-        <Link to="/home">Home</Link>
-      </div>
-   
       <div>
           <Switch>
           <Route exact path="/">
@@ -50,6 +46,9 @@ function App() {
             countryList.map((item)=>{
               return (
               <Route path={`/details/${item.toLowerCase()}`}>
+              <div>
+              <Link to="/home">Back</Link>
+              </div>
               <Details country={`${item.toLowerCase()}`} />
               </Route> 
               )
