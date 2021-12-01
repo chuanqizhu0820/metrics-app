@@ -11,13 +11,9 @@ function Details({country}){
    datebefore = datebefore.toISOString().split('T')[0];
    const [data, setData] = useState(null);
 
-//    /spain?date_from=2020-03-20&date_to=2020-03-22
    useEffect(()=>fetch(`https://api.covid19tracking.narrativa.com/api/country/${country}?date_from=${datebefore}&date_to=${datenow}`)
   .then(res => res.json())
   .then(data => setData(data.dates)),[])// eslint-disable-line
-
-  console.log(data);
-//   console.log(Object.values(data["2021-11-26"])[0]);
 
     return (
         <div>
