@@ -1,3 +1,9 @@
 .chart-container{
     width: 100vw;
 }
+
+.detail-page{
+    background-color: blue;
+    padding-bottom: 100%;
+    color: white;
+}

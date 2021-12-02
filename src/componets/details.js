@@ -10,9 +10,9 @@ function ChartNew(props){
                 title="New cases"
                 data={props.data}
                 >
-                <XAxis axisLine={false} dataKey="date" height={50} label={{ value: 'Daily new cases', position: 'insideBottom', fontSize: '20'}} />
-                <Scatter dataKey="new" fill="#8884d8" line shape="square">
-                <LabelList dataKey="new" position="bottom" />
+                <XAxis axisLine={false} tick={{ fill: 'white' }} dataKey="date" height={50} label={{ value: 'Daily new cases', position: 'insideBottom', fontSize: '20', fill: 'white'}} />
+                <Scatter dataKey="new" fill="white" line shape="square">
+                <LabelList dataKey="new" position="bottom" style={{ fill: 'white' }}/>
                 </Scatter>
                 </ScatterChart>
             </ResponsiveContainer>
@@ -26,9 +26,9 @@ function ChartDeaths(props){
                 title="New deaths"
                 data={props.data}
                 >
-                <XAxis axisLine={false} dataKey="date" height={50} label={{ value: 'Daily new deaths', position: 'insideBottom', fontSize: '20'}} />
-                <Scatter dataKey="deaths" fill="#242E52" line shape="square">
-                <LabelList dataKey="deaths" position="bottom" />
+                <XAxis axisLine={false} tick={{ fill: 'white' }} dataKey="date" height={50} label={{ value: 'Daily new deaths', position: 'insideBottom', fontSize: '20', fill: 'white'}} />
+                <Scatter dataKey="deaths" fill="white" line shape="square">
+                <LabelList dataKey="deaths" position="bottom" style={{ fill: 'white' }}/>
                 </Scatter>
                 </ScatterChart>
             </ResponsiveContainer>
@@ -61,7 +61,7 @@ function Details({country}){
     }),[])// eslint-disable-line
 
     return (!!data? (
-        <div className="d-flex flex-column align-items-center">
+        <div className="detail-page d-flex flex-column align-items-center">
         <div className="d-flex flex-column align-items-center" style={{paddingBottom:'15px'}}>
             <h1>{country}</h1>
             <p>Recent daily cases and deaths</p>
