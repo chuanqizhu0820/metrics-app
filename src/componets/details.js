@@ -1,7 +1,39 @@
 
 import { useState, useEffect } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { ScatterChart, Scatter, XAxis, LabelList, ResponsiveContainer } from 'recharts';
 import './details.css'
+
+function ChartNew(props){
+    return (
+            <ResponsiveContainer width="100%" height={300}>
+                <ScatterChart 
+                title="New cases"
+                data={props.data}
+                >
+                <XAxis axisLine={false} dataKey="date" height={50} label={{ value: 'Daily new cases', position: 'insideBottom', fontSize: '20'}} />
+                <Scatter dataKey="new" fill="#8884d8" line shape="square">
+                <LabelList dataKey="new" position="bottom" />
+                </Scatter>
+                </ScatterChart>
+            </ResponsiveContainer>
+    )
+}
+
+function ChartDeaths(props){
+    return (
+            <ResponsiveContainer width="100%" height={300}>
+                <ScatterChart 
+                title="New deaths"
+                data={props.data}
+                >
+                <XAxis axisLine={false} dataKey="date" height={50} label={{ value: 'Daily new deaths', position: 'insideBottom', fontSize: '20'}} />
+                <Scatter dataKey="deaths" fill="#242E52" line shape="square">
+                <LabelList dataKey="deaths" position="bottom" />
+                </Scatter>
+                </ScatterChart>
+            </ResponsiveContainer>
+    )
+}
 
 function Details({country}){
 
@@ -28,31 +60,18 @@ function Details({country}){
         setData(dataChart);
     }),[])// eslint-disable-line
 
-     console.log(data);
-    return (
-        <div className="chart-container">
-            <ResponsiveContainer width="100%" height="100%">
-                <BarChart 
-                width={600}
-                height={300}
-                data={data}
-                >
-                <XAxis axisLine={false} dataKey="date" height={50}/>
-                <Bar dataKey="new" fill="#8884d8" label={{ fill: 'black', fontSize: 15 }}/>
-                </BarChart>
-            </ResponsiveContainer>
-            <ResponsiveContainer width="100%" height="100%">
-                <BarChart 
-                width={600}
-                height={300}
-                data={data}
-                >
-                <XAxis axisLine={false} dataKey="date" height={50}/>
-                <Bar dataKey="deaths" fill="#242E52" label={{ fill: 'white', fontSize: 15 }}/>
-                </BarChart>
-            </ResponsiveContainer>
+    return (!!data? (
+        <div className="d-flex flex-column align-items-center">
+        <div className="d-flex flex-column align-items-center" style={{paddingBottom:'15px'}}>
+            <h1>{country}</h1>
+            <p>Recent daily cases and deaths</p>
         </div>
-    )
+        <div className="chart-container">
+            <ChartNew data={data} />
+            <ChartDeaths data={data} />
+        </div>
+        </div>
+    ):<div>data is loading...</div>)
 }
 
 export default Details
