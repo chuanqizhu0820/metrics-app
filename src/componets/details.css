@@ -3,7 +3,8 @@
 }
 
 .detail-page{
-    background-color: blue;
+    background-color: rgb(85, 85, 230);
     padding-bottom: 100%;
     color: white;
+    border: solid 5px rgb(85, 85, 230);
 }

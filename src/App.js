@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { loadHome } from './redux/app';
 
-export const countryList = ['China', 'Japan', 'Germany', 'US', "United Kingdom", "Russia", "France", "Italy", "Spain"];
+export const countryList = ['China', 'Japan', 'Germany', 'US', "United Kingdom", "Russia", "France", "Italy", "Spain", "India"];
 
 let datenow = new Date();
 datenow.setDate(datenow.getDate() - 1);
@@ -44,8 +44,8 @@ function App() {
             countryList.map((item)=>{
               return (
               <Route path={`/details/${item.toLowerCase()}`}>
-              <div>
-              <Link to="/home">Back</Link>
+              <div style={{backgroundColor:'rgb(85, 85, 230)', paddingLeft:'10px', border: 'solid 5px rgb(85, 85, 230)'}}>
+              <Link to="/home" style={{textDecoration: 'none', fontSize:'20px', color:"white"}}>{"<"}</Link>
               </div>
               <Details country={`${item.toLowerCase()}`} />
               </Route> 
