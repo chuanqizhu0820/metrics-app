@@ -4,7 +4,7 @@ export const loadDetails = (payload) => ({
 
 const detailReducer = (state = [], action) => {
   switch (action.type) {
-    case 'LOAD_DETAILS': 
+    case 'LOAD_DETAILS':
       return [...state, action.payload];
     default:
       return state;

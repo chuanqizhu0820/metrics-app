@@ -5,7 +5,7 @@ import homeReducer from './app';
 import detailReducer from './details';
 
 const reducer = combineReducers({
-  homeReducer, detailReducer
+  homeReducer, detailReducer,
 });
 
 const store = createStore(
