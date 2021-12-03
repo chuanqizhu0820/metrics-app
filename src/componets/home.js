@@ -5,8 +5,6 @@ import { dateNow } from '../App';
 
 function Home(){
     const data = useSelector((state)=>state.homeReducer[0])
-    const allData = useSelector((state)=> state);
-    console.log(allData);
     let count = 0
     if (!!data){
     const dataArr = Object.values(Object.values(data)[0].countries);
