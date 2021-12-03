@@ -1,5 +1,7 @@
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadDetails } from '../redux/details';
 import { ScatterChart, Scatter, XAxis, YAxis, LabelList, ResponsiveContainer } from 'recharts';
 import './details.css'
 
@@ -45,9 +47,10 @@ function Details({country}){
    datenow = datenow.toISOString().split('T')[0];
    datebefore.setDate(datebefore.getDate() - 7);
    datebefore = datebefore.toISOString().split('T')[0];
-   const [data, setData] = useState(null);
-   const [newMinMax, setNewMM] = useState([]);
-   const [dMinMax, setDMM] = useState([]);
+
+   const dispatch = useDispatch();
+   const data = useSelector((state)=>state.detailReducer[0])
+   console.log(data);
 
    useEffect(()=>fetch(`https://api.covid19tracking.narrativa.com/api/country/${country}?date_from=${datebefore}&date_to=${datenow}`)
   .then(res => res.json())
@@ -76,15 +79,10 @@ function Details({country}){
         let dMin = Math.min(...dArr);
         let dMax = Math.max(...dArr);
         let dRange = dMax -dMin;
-        dMin = dMin - dRange*0.3
+        dMin = dMin - dRange*0.3;
         dMax = dMax + dRange*0.3;
-        console.log(dMin, dMax);
-        setNewMM([newMin,newMax]);
-        setDMM([dMin, dMax]);
-        setData(dataChart);
+        dispatch(loadDetails({detail: dataChart, newMM: [newMin,newMax], dMM:[dMin, dMax]}))
     }),[])// eslint-disable-line
-
-    // console.log(newMinMax);
 
     return (!!data? (
         <div className="detail-page d-flex flex-column align-items-center">
@@ -93,9 +91,9 @@ function Details({country}){
             <p>Recent daily cases and deaths</p>
         </div>
         <div className="chart-container">
-            <ChartNew data={data} mm={newMinMax}/>
+            <ChartNew data={data.detail} mm={data.newMM}/>
             <hr />
-            <ChartDeaths data={data} mm={dMinMax}/>
+            <ChartDeaths data={data.detail} mm={data.dMM}/>
         </div>
         </div>
     ):<div style={{position: 'fixed', top: '0%', left: '50%', transform: 'translate(-50%, 0)', paddingTop:'40vh',fontSize: '30px', backgroundColor: 'rgb(85, 85, 230)', height:'100vh',width:'100vw', textAlign:'center', color:'white'}}>Loading...</div>)

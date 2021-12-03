@@ -2,7 +2,7 @@ export const loadHome = (payload) => ({
   type: 'LOAD_HOME', payload,
 });
 
-const dataReducer = (state = [], action) => {
+const homeReducer = (state = [], action) => {
   switch (action.type) {
     case 'LOAD_HOME':
       return [...state, action.payload.home.dates];
@@ -11,4 +11,4 @@ const dataReducer = (state = [], action) => {
   }
 };
 
-export default dataReducer;
+export default homeReducer;
