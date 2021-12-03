@@ -3,7 +3,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 # Netlify Link
-https://nifty-kowalevski-416ca7.netlify.app
+
+https://pacific-waters-37857.herokuapp.com/
 
 ## Available Scripts
 
